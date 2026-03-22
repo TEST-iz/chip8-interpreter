@@ -3,6 +3,7 @@ using namespace std;
 
 class Chip8 {
     public:
+        unsigned short opcode;
         unsigned char memory[4096];
         unsigned char V[16];
         unsigned short I;
