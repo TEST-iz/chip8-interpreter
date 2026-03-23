@@ -1,4 +1,7 @@
 #include <iostream>
+#include <fstream>
+#include <system_error>
+
 using namespace std;
 
 class Chip8 {
@@ -33,6 +36,7 @@ class Chip8 {
         unsigned char delay_timer;
         unsigned char sound_timer;
         void initialize();
+        void loadROM(char const* filename);
 };
 
 void Chip8::initialize() {
@@ -61,4 +65,32 @@ void Chip8::initialize() {
 
     //TO-DO
     //initialize sound? and keybinds
+}
+
+void Chip8::loadROM(char const* filename) {
+    ifstream file(filename, ios::binary | ios::ate);
+
+    if (!file.is_open()) {
+        throw runtime_error("File could not be opened");
+    }
+
+    else {
+        streampos size = file.tellg();
+        if (size > 3584) {
+            file.close();
+            throw runtime_error("File exceeds size limit");
+        }
+
+        char* buffer = new char[size];
+
+        file.seekg(0, std::ios::beg);
+        file.read(buffer, size);
+        file.close();
+
+        for (int i = 0x200; i < 0x200 + size; i++) {
+            memory[i] = buffer[i - 0x200];
+        }
+
+        delete[] buffer;
+    }
 }
