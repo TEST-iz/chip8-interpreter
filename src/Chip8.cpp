@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <system_error>
+#include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -39,6 +41,12 @@ class Chip8 {
         void loadROM(char const* filename);
         void fetch();
         void decode(unsigned short opcode);
+
+        // Chip8() {
+        //     unsigned int seed = (std::chrono::system_clock::now().time_since_epoch().count());
+        //     std::mt19937 rng(seed);
+        //     std::uniform_int_distribution<int> gen(0, 255);
+        // }
 };
 
 void Chip8::initialize() {
@@ -228,6 +236,24 @@ void Chip8::decode(unsigned short opcode) {
             
             break;
             }
+        
+        case 0x9:
+            if (V[X] != V[Y]) {
+                PC += 2;
+            }
+            break;
+        
+        case 0xA:
+            I = NNN;
+            break;
+        
+        case 0xB:
+            PC = NNN + V[0x0];
+            break;
+        
+        case 0xC:
+            ;
+            
     }
 
 }
