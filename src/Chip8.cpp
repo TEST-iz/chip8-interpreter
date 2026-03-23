@@ -41,8 +41,8 @@ class Chip8 {
 
 void Chip8::initialize() {
     for (int i = 0; i < 4096; i++) {
-        if (i >=80 and i < 160) {
-            memory[i] = font[i - 80];
+        if (i >=0x50 and i < 0xA0) {
+            memory[i] = font[i - 0x50];
         }
         else {
             memory[i] = 0x00;
