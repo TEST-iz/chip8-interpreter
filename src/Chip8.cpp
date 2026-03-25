@@ -130,7 +130,7 @@ void Chip8::decode(unsigned short opcode) {
                     break;
                 
                 case 0xEE:
-                    PC = S[SP];
+                    PC = S[SP - 1];
                     S[SP] = 0x0000;
                     SP -= 1;
                     break;
@@ -142,8 +142,8 @@ void Chip8::decode(unsigned short opcode) {
             break;
 
         case 0x2:
-            SP += 1;
             S[SP] = PC;
+            SP += 1;
             PC = NNN;
             break;
 
@@ -233,9 +233,8 @@ void Chip8::decode(unsigned short opcode) {
                     V[0xF] = (V[X] >> 7);
                     V[X] = V[X] << 1;
                     break;
-            
-            break;
             }
+            break;
         
         case 0x9:
             if (V[X] != V[Y]) {
