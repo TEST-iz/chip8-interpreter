@@ -251,9 +251,35 @@ void Chip8::decode(unsigned short opcode) {
             PC = NNN + V[0x0];
             break;
         
+        //come back to later
         case 0xC:
-            ;
-            
+            {}; //code actual functionality later
+            break;
+        
+        case 0xD:
+            unsigned int x_coord = V[X] & 63;
+            unsigned int y_coord = V[Y] & 31;
+            V[0xF] = 0;
+            for (int height = 0; height < N; height++) {
+                if (y_coord + height == 32) {
+                        break;
+                    }
+                unsigned char pixel_row = memory[I + height];
+                for (int pixel = 0; pixel < 8; pixel++) {
+                    if (x_coord + pixel == 64) {
+                        break;
+                    }
+
+                    if (gfx[x_coord + pixel + (y_coord + height) * 64] == 1 && (pixel_row >> (7 - pixel) & 1) == 1) {
+                        V[0xF] = 1;
+                        gfx[x_coord + pixel + (y_coord + height) * 64] = 0;
+                    }
+                    else if ((pixel_row >> (7 - pixel) & 1) == 1 && gfx[x_coord + pixel + (y_coord + height) * 64] == 0) {
+                        gfx[x_coord + pixel + (y_coord + height) * 64] = 1;
+                    }
+                    
+                }
+            }
     }
 
 }
