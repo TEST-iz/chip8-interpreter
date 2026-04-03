@@ -42,6 +42,7 @@ class Chip8 {
         void loadROM(char const* filename);
         void fetch();
         void decode(unsigned short opcode);
+        void cycle();
 
         // Chip8() {
         //     unsigned int seed = (std::chrono::system_clock::now().time_since_epoch().count());
@@ -401,6 +402,20 @@ void Chip8::decode(unsigned short opcode) {
                     break;
             }
         break;
+    }
+
+}
+
+void Chip8::cycle() {
+    fetch();
+    decode(opcode);
+
+    if (delay_timer > 0) {
+        delay_timer -= 1;
+    }
+
+    if (sound_timer > 0) {
+        sound_timer -= 1;
     }
 
 }
