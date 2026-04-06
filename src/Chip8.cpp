@@ -43,6 +43,7 @@ class Chip8 {
         void fetch();
         void decode(unsigned short opcode);
         void cycle();
+        void updateTimers();
 
         // Chip8() {
         //     unsigned int seed = (std::chrono::system_clock::now().time_since_epoch().count());
@@ -406,6 +407,16 @@ void Chip8::decode(unsigned short opcode) {
 
 }
 
+void Chip8::updateTimers() {
+    if (delay_timer > 0) {
+        delay_timer -= 1;
+    }
+
+    if (sound_timer > 0) {
+        delay_timer -= 1;
+    }
+}
+
 void Chip8::cycle() {
     fetch();
     decode(opcode);
@@ -417,5 +428,4 @@ void Chip8::cycle() {
     if (sound_timer > 0) {
         sound_timer -= 1;
     }
-
 }
