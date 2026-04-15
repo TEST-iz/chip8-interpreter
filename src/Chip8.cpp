@@ -31,8 +31,9 @@ void Chip8::initialize() {
         gfx[i] = 0x00000000;
     }
 
-    //TO-DO
-    //initialize sound? and keybinds
+    for (int i = 0; i < 16; i++) {
+        key[i] = 0;
+    }
 }
 
 void Chip8::loadROM(char const* filename) {
