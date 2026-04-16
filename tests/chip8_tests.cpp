@@ -88,6 +88,31 @@ TEST_CASE("Opcode DXYN: Drawing and Collision", "[graphics]") {
         // Verify: Collision flag (VF) must be set to 1
         REQUIRE(myChip8.V[0xF] == 1);
     }
+
+    SECTION("Screen Edge Wrap Around") {
+        myChip8.initialize()
+
+        myChip8.memory[0x300] = 0xF0; 
+        myChip8.I = 0x300;
+
+        myChip8.V[0] = 66; // Should wrap to 66 % 64 = 2
+        myChip8.V[1] = 34; // Should wrap to 34 % 32 = 2
+
+        // Execute: Draw 1 byte (0xF0) at (66, 34)
+        // Opcode: D (Draw) | X (Reg 0) | Y (Reg 1) | N (1 byte tall)
+        myChip8.decode(0xD011);
+
+        // 3. Verify the pixels wrapped to the top-left area (2, 2)
+        // Index: (y * 64) + x -> (2 * 64) + 2 = 130
+        REQUIRE(myChip8.gfx[(2 * 64) + 2] == 1);
+        REQUIRE(myChip8.gfx[(2 * 64) + 3] == 1);
+        REQUIRE(myChip8.gfx[(2 * 64) + 4] == 1);
+        REQUIRE(myChip8.gfx[(2 * 64) + 5] == 1);
+        
+        // Ensure the 5th pixel in that row is still 0
+        REQUIRE(myChip8.gfx[(2 * 64) + 6] == 0);
+    }
+}
 }
 
 #endif
