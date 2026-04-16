@@ -7,7 +7,7 @@ TEST_CASE("Chip8 Initialization", "[init]") {
     myChip8.initialize();
 
     // Check that PC starts at the correct memory address
-    REQUIRE(myChip8.pc == 0x200);
+    REQUIRE(myChip8.PC == 0x200);
     
     // Check that registers are cleared
     for(int i = 0; i < 16; i++) {
@@ -25,7 +25,7 @@ TEST_CASE("Opcode 0x8xy4: ADD with Overflow", "[opcodes]") {
 
     // Manually trigger the ADD opcode (8014)
     // Assuming your function is something like emulateCycle() or execute(opcode)
-    myChip8.execute(0x8014); 
+    myChip8.decode(0x8014); 
 
     // Result should be 0x00 (0xFF + 0x01 = 0x100, which truncates to 8-bit 0x00)
     REQUIRE(myChip8.V[0] == 0x00);
