@@ -44,8 +44,6 @@ class Chip8 {
         void cycle();
         void updateTimers();
 
-        Chip8();
-
     private:
         mt19937 generator;
 };

@@ -212,10 +212,11 @@ void Chip8::decode(unsigned short opcode) {
             break;
         
         //come back to later
-        case 0xC:
+        case 0xC: {
             uniform_int_distribution randNum(0, 255);
             V[X] = randNum(generator) & NN;
             break;
+        }
         
         case 0xD: {
             unsigned int x_coord = V[X] & 63;

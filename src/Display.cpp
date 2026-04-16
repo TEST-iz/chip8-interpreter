@@ -33,6 +33,10 @@ bool Display::processInput(unsigned char* keys) {
 
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym) {
+                    case SDLK_ESCAPE:
+                        quit = true;
+                        break;
+                        
                     case SDLK_x:
                         keys[0] = 1;
                         break;
