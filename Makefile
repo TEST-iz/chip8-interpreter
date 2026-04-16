@@ -16,7 +16,7 @@ all:
 	$(CXX) $(CXXFLAGS) src/main.cpp src/Display.cpp src/Chip8.cpp -o $(OUT) $(INCLUDES) $(LDFLAGS) $(LIBS)
 
 test:
-	$(CXX) $(CXXFLAGS) -DUSING_CATCH -I/usr/include/catch2 tests/test_main.cpp tests/chip8_tests.cpp src/chip8.cpp -o unit_tests
+	$(CXX) $(CXXFLAGS) -DUSING_CATCH -I/usr/include/ tests/test_main.cpp tests/chip8_tests.cpp src/chip8.cpp -o unit_tests
 	./unit_tests
 
 # 'clean' helps you reset your folder
