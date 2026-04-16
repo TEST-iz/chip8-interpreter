@@ -11,7 +11,7 @@ bool Display::initialize() {
         return false;
     }
     else {
-        SDL_Window* window = SDL_CreateWindow("Chip-8 Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 320, SDL_WINDOW_SHOWN);
+        window = SDL_CreateWindow("Chip-8 Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 320, SDL_WINDOW_SHOWN);
         if (window == NULL) {
             cout << "Window could not be created! SDL_Error: %s\n" << SDL_GetError();
             return false;
