@@ -50,4 +50,44 @@ TEST_CASE("Opcode Stack Flow", "[opcodes]") {
     REQUIRE(myChip8.SP == oldSP);
 }
 
+TEST_CASE("Opcode DXYN: Drawing and Collision", "[graphics]") {
+    Chip8 MyChip8;
+    myChip8.initialize();
+
+    // 1. Setup a simple sprite in memory (a single horizontal line: 11110000)
+    // We'll put it at address 0x300
+    myChip8.memory[0x300] = 0xF0; 
+    myChip8.I = 0x300;
+
+    // 2. Setup registers for the draw command
+    myChip8.V[0] = 5; // X-coordinate
+    myChip8.V[1] = 5; // Y-coordinate
+
+    // Execute: Draw 1 byte (0xF0) at (5, 5)
+    // Opcode format: D (Draw) | X (Reg 0) | Y (Reg 1) | N (1 byte tall)
+    myChip8.decode(0xD011);
+
+    // Verify: The first 4 pixels starting at (5, 5) should be ON (1)
+    // Index calculation: (y * 64) + x
+    REQUIRE(myChip8.gfx[(5 * 64) + 5] == 1);
+    REQUIRE(myChip8.gfx[(5 * 64) + 6] == 1);
+    REQUIRE(myChip8.gfx[(5 * 64) + 7] == 1);
+    REQUIRE(myChip8.gfx[(5 * 64) + 8] == 1);
+    REQUIRE(myChip8.gfx[(5 * 64) + 9] == 0); // 5th pixel should be OFF
+
+    // Verify: No collision occurred yet
+    REQUIRE(myChip8.V[0xF] == 0);
+
+    SECTION("XOR Collision") {
+        // Draw the exact same sprite again at the same location
+        myChip8.decode(0xD011);
+
+        // Verify: The pixels should now be flipped back to OFF (0)
+        REQUIRE(myChip8.gfx[(5 * 64) + 5] == 0);
+        
+        // Verify: Collision flag (VF) must be set to 1
+        REQUIRE(myChip8.V[0xF] == 1);
+    }
+}
+
 #endif
