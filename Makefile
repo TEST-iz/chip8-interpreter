@@ -16,7 +16,7 @@ all:
 	$(CXX) $(CXXFLAGS) src/main.cpp src/Display.cpp src/Chip8.cpp -o $(OUT) $(INCLUDES) $(LDFLAGS) $(LIBS)
 
 test:
-	$(CXX) $(CXXFLAGS) -DUSING_CATCH -I/usr/include/catch2 \
+	$(CXX) $(CXXFLAGS) -DUSING_CATCH -I/usr/share/miniconda/pkgs/cpp-expected-1.1.0-hdb19cb5_0/info/recipe \
 	tests/tests_main.cpp \
 	tests/chip8_tests.cpp \
 	src/Chip8.cpp \

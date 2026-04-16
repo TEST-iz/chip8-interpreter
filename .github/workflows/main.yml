@@ -12,9 +12,6 @@ jobs:
 
       - name: Install Catch2
         run: sudo apt-get update && sudo apt-get install -y catch2
-   
-      - name: List
-        run: sudo find /usr -name "catch.hpp"
 
       - name: Run Unit Tests
         # Notice we don't need to pass any SDL paths here anymore
