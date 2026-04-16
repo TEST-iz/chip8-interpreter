@@ -101,22 +101,22 @@ TEST_CASE("IBM Opcode Testing", "[opcodes]") {
     myChip8.initialize();
 
     SECTION("Opcode 1NNN") {
-        myChip8.decode(0x1420)
-        REQUIRE(myChip8.PC == 0x420)
+        myChip8.decode(0x1420);
+        REQUIRE(myChip8.PC == 0x420);
     }
     SECTION("Opcode 6XNN") {
-        myChip8.decode(0x6367)
-        REQUIRE(myChip8.V[0x3] == 0x67)
+        myChip8.decode(0x6367);
+        REQUIRE(myChip8.V[0x3] == 0x67);
     }
 
     SECTION("Opcode 7XNN") {
-        myChip8.decode(0x7420)
-        REQUIRE(myChip8.V[0x4] == 0x20)
+        myChip8.decode(0x7420);
+        REQUIRE(myChip8.V[0x4] == 0x20);
     }
 
     SECTION("Opcode ANNN") {
-        myChip8.decode(0xA420)
-        REQUIRE(myChip8.I == 0x420)
+        myChip8.decode(0xA420);
+        REQUIRE(myChip8.I == 0x420);
     }
 
     SECTION("Opcode 00E0") {
@@ -128,11 +128,11 @@ TEST_CASE("IBM Opcode Testing", "[opcodes]") {
 
         myChip8.decode(0xD011);
         myChip8.decode(00E0);
-        running = 0
+        unsigned int running = 0;
         for (int i = 0; i < 2048; i++) {
-            running = running | gfx[i]
+            running = running | gfx[i];
         }
-        REQUIRE(running == 0)
+        REQUIRE(running == 0);
     }
 }
 
