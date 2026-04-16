@@ -130,7 +130,7 @@ TEST_CASE("IBM Opcode Testing", "[opcodes]") {
         myChip8.decode(00E0);
         unsigned int running = 0;
         for (int i = 0; i < 2048; i++) {
-            running = running | gfx[i];
+            running = running | myChip8.gfx[i];
         }
         REQUIRE(running == 0);
     }
