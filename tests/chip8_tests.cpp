@@ -40,12 +40,12 @@ TEST_CASE("Opcode Stack Flow", "[opcodes]") {
     myChip8.initialize();
     myChip8.PC = 130;
     oldSP = myChip8.SP;
-    myChip8.execute(0x2123);
+    myChip8.decode(0x2123);
     REQUIRE(SP - 1 == oldSP);
     REQUIRE(myChip8.S[myChip8.SP - 1] == 130);
     REQUIRE(myChip8.PC == 123);
     
-    myChip8.execute(0x00EE);
+    myChip8.decode(0x00EE);
     REQUIRE(myChip8.PC == 130);
     REQUIRE(myChip8.SP == oldSP);
 }
