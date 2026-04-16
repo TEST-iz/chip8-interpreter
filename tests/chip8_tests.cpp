@@ -76,23 +76,23 @@ TEST_CASE("Opcode DXYN: Drawing and Collision", "[graphics]") {
     }
 
     SECTION("Screen Edge Clipping") {
-    myChip8.initialize();
+        myChip8.initialize();
 
-    myChip8.memory[0x300] = 0xFF; 
-    myChip8.I = 0x300;
+        myChip8.memory[0x300] = 0xFF; 
+        myChip8.I = 0x300;
 
-    myChip8.V[0] = 60; 
-    myChip8.V[1] = 10;
+        myChip8.V[0] = 60; 
+        myChip8.V[1] = 10;
 
-    myChip8.decode(0xD011);
+        myChip8.decode(0xD011);
 
-    REQUIRE(myChip8.gfx[(10 * 64) + 60] == 1);
-    REQUIRE(myChip8.gfx[(10 * 64) + 61] == 1);
-    REQUIRE(myChip8.gfx[(10 * 64) + 62] == 1);
-    REQUIRE(myChip8.gfx[(10 * 64) + 63] == 1);
+        REQUIRE(myChip8.gfx[(10 * 64) + 60] == 1);
+        REQUIRE(myChip8.gfx[(10 * 64) + 61] == 1);
+        REQUIRE(myChip8.gfx[(10 * 64) + 62] == 1);
+        REQUIRE(myChip8.gfx[(10 * 64) + 63] == 1);
 
-    REQUIRE(myChip8.gfx[(10 * 64) + 0] == 0);
-    REQUIRE(myChip8.gfx[(10 * 64) + 1] == 0);
+        REQUIRE(myChip8.gfx[(10 * 64) + 0] == 0);
+        REQUIRE(myChip8.gfx[(10 * 64) + 1] == 0);
     }
 }
 }
