@@ -39,7 +39,7 @@ TEST_CASE("Opcode Stack Flow", "[opcodes]") {
     Chip8 myChip8;
     myChip8.initialize();
     myChip8.PC = 130;
-    oldSP = myChip8.SP;
+    unsigned char oldSP = myChip8.SP;
     myChip8.decode(0x2123);
     REQUIRE(myChip8.SP - 1 == oldSP);
     REQUIRE(myChip8.S[myChip8.SP - 1] == 130);
