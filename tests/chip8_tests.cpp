@@ -1,5 +1,5 @@
 #ifdef USING_CATCH
-#include <catch2/catch.hpp>
+#include <catch.hpp>
 #include "../src/chip8.h" // Adjust path to your header
 
 TEST_CASE("Chip8 Initialization", "[init]") {
