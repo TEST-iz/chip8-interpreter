@@ -1,6 +1,8 @@
 #ifndef Chip8_H
 #define Chip8_H
 
+#include <random>
+
 using namespace std;
 
 class Chip8 {
@@ -42,11 +44,10 @@ class Chip8 {
         void cycle();
         void updateTimers();
 
-        // Chip8() {
-        //     unsigned int seed = (std::chrono::system_clock::now().time_since_epoch().count());
-        //     std::mt19937 rng(seed);
-        //     std::uniform_int_distribution<int> gen(0, 255);
-        // }
+        Chip8();
+
+    private:
+        mt19937 generator;
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include <system_error>
 #include <random>
 #include <chrono>
+#include <ctime>
 
 using namespace std;
 
@@ -26,6 +27,7 @@ void Chip8::initialize() {
     delay_timer = 0;
     sound_timer = 0;
     SP = 0x00;
+    generator.seed(time(0));
 
     for (int i = 0; i < 2048; i++) {
         gfx[i] = 0x00000000;
@@ -211,7 +213,8 @@ void Chip8::decode(unsigned short opcode) {
         
         //come back to later
         case 0xC:
-            {}; //code actual functionality later
+            uniform_int_distribution randNum(0, 255);
+            V[X] = randNum(generator) & NN;
             break;
         
         case 0xD: {
