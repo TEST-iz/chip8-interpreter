@@ -51,7 +51,7 @@ TEST_CASE("Opcode Stack Flow", "[opcodes]") {
 }
 
 TEST_CASE("Opcode DXYN: Drawing and Collision", "[graphics]") {
-    Chip8 MyChip8;
+    Chip8 myChip8;
     myChip8.initialize();
 
     // 1. Setup a simple sprite in memory (a single horizontal line: 11110000)
