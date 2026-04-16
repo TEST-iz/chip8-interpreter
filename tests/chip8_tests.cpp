@@ -34,4 +34,20 @@ TEST_CASE("Opcode 0x8xy4: ADD with Overflow", "[opcodes]") {
     // 0xFF + 0x01 > 255, so VF should be 1
     REQUIRE(myChip8.V[0xF] == 1);
 }
+
+TEST_CASE("Opcode Stack Flow", "[opcodes]") {
+    Chip8 myChip8;
+    myChip8.initialize();
+    myChip8.PC = 130
+    oldSP = myChip8.SP
+    myChip8.execute(0x2123)
+    REQUIRE(SP - 1 == oldSP)
+    REQUIRE(myChip8.S[myChip8.SP - 1] == 130)
+    REQUIRE(myChip8.PC == 123)
+    
+    myChip8.execute(0x00EE)
+    REQUIRE(myChip8.PC == 130)
+    REQUIRE(myChip8.SP == oldSP)
+}
+
 #endif
