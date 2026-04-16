@@ -95,6 +95,5 @@ TEST_CASE("Opcode DXYN: Drawing and Collision", "[graphics]") {
         REQUIRE(myChip8.gfx[(10 * 64) + 1] == 0);
     }
 }
-}
 
 #endif
