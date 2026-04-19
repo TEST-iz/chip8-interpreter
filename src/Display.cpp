@@ -16,11 +16,29 @@ bool Display::initialize() {
             cout << "Window could not be created! SDL_Error: %s\n" << SDL_GetError();
             return false;
         }
-        else {
-            return true;
+
+        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+        if (renderer == NULL) {
+            cout << "Renderer could not be created! SDL_Error: %s\n" << SDL_GetError();
+            return false;
         }
+        
+        texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, 64, 32);
+        if (texture == NULL) {
+            cout << "Texture could not be created! SDL_Error: %s\n" << SDL_GetError();
+            return false;
+        }
+        return true;
     }
 }
+
+bool Display::draw(unsigned int* gfx) {
+    SDL_UpdateTexture(texture, nullptr, gfx, 64 * sizeof(unsigned int));
+    SDL_RenderClear(renderer);
+    SDL_RenderCopy(renderer, texture, nullptr, nullptr);
+    SDL_RenderPresent(renderer);
+    return true;
+    }  
 
 bool Display::processInput(unsigned char* keys) {
     SDL_Event e;
