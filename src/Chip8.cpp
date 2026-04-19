@@ -232,12 +232,12 @@ void Chip8::decode(unsigned short opcode) {
                         break;
                     }
 
-                    if (gfx[x_coord + pixel + (y_coord + height) * 64] == 1 && (pixel_row >> (7 - pixel) & 1) == 1) {
+                    if (gfx[x_coord + pixel + (y_coord + height) * 64] == 0xFFFFFFFF && (pixel_row >> (7 - pixel) & 1) == 1) {
                         V[0xF] = 1;
-                        gfx[x_coord + pixel + (y_coord + height) * 64] = 0;
+                        gfx[x_coord + pixel + (y_coord + height) * 64] = 0x00000000;
                     }
-                    else if ((pixel_row >> (7 - pixel) & 1) == 1 && gfx[x_coord + pixel + (y_coord + height) * 64] == 0) {
-                        gfx[x_coord + pixel + (y_coord + height) * 64] = 1;
+                    else if ((pixel_row >> (7 - pixel) & 1) == 1 && gfx[x_coord + pixel + (y_coord + height) * 64] == 0x00000000) {
+                        gfx[x_coord + pixel + (y_coord + height) * 64] = 0xFFFFFFFF;
                     }
                     
                 }
