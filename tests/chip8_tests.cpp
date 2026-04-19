@@ -59,10 +59,10 @@ TEST_CASE("Opcode DXYN: Drawing and Collision", "[graphics]") {
 
     myChip8.decode(0xD011);
 
-    REQUIRE(myChip8.gfx[(5 * 64) + 5] == 1);
-    REQUIRE(myChip8.gfx[(5 * 64) + 6] == 1);
-    REQUIRE(myChip8.gfx[(5 * 64) + 7] == 1);
-    REQUIRE(myChip8.gfx[(5 * 64) + 8] == 1);
+    REQUIRE(myChip8.gfx[(5 * 64) + 5] == 0xFFFFFFFF);
+    REQUIRE(myChip8.gfx[(5 * 64) + 6] == 0xFFFFFFFF);
+    REQUIRE(myChip8.gfx[(5 * 64) + 7] == 0xFFFFFFFF);
+    REQUIRE(myChip8.gfx[(5 * 64) + 8] == 0xFFFFFFFF);
     REQUIRE(myChip8.gfx[(5 * 64) + 9] == 0);
 
     REQUIRE(myChip8.V[0xF] == 0);
@@ -86,10 +86,10 @@ TEST_CASE("Opcode DXYN: Drawing and Collision", "[graphics]") {
 
         myChip8.decode(0xD011);
 
-        REQUIRE(myChip8.gfx[(10 * 64) + 60] == 1);
-        REQUIRE(myChip8.gfx[(10 * 64) + 61] == 1);
-        REQUIRE(myChip8.gfx[(10 * 64) + 62] == 1);
-        REQUIRE(myChip8.gfx[(10 * 64) + 63] == 1);
+        REQUIRE(myChip8.gfx[(10 * 64) + 60] == 0xFFFFFFFF);
+        REQUIRE(myChip8.gfx[(10 * 64) + 61] == 0xFFFFFFFF);
+        REQUIRE(myChip8.gfx[(10 * 64) + 62] == 0xFFFFFFFF);
+        REQUIRE(myChip8.gfx[(10 * 64) + 63] == 0xFFFFFFFF);
 
         REQUIRE(myChip8.gfx[(10 * 64) + 0] == 0);
         REQUIRE(myChip8.gfx[(10 * 64) + 1] == 0);
