@@ -12,8 +12,10 @@ Chip8 chip8;
 
 int main(int argc, char* argv[]) {
     bool quit = false;
+    char* romPath = argv[1];
     display.initialize();
     chip8.initialize();
+    chip8.loadROM(romPath);
     const std::chrono::microseconds timerInterval = std::chrono::microseconds(16666);
     const std::chrono::microseconds cpuInterval = std::chrono::microseconds(1428);
     auto lastCPUTime = std::chrono::steady_clock::now();
