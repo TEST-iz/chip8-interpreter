@@ -1,5 +1,5 @@
 #ifdef USING_CATCH
-#include <catch2/catch.hpp>
+#include <catch.hpp>
 #include "../src/Chip8.h"
 
 TEST_CASE("Chip8 Initialization", "[init]") {
